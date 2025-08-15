@@ -1,0 +1,298 @@
+/*  Google Fonts इम्पोर्ट - Poppins और Roboto fonts लोड करना  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+
+/*  सभी elements का default margin और padding हटाना और box-sizing border-box करना  */
+*{
+  margin:0; /* बाहर का space हटाना */
+  padding:0; /* अंदर का space हटाना */
+  box-sizing:border-box; /* padding और border को width/height में शामिल करना */
+}
+
+/*  Root variables - पूरे CSS में एक ही जगह से color, radius, shadow को control करने के लिए  */
+:root{
+  --primary:#183b56; /* मुख्य text color */
+  --secondary:#577592; /* सेकंडरी text color */
+  --accent:#2487fd; /* बटन का मुख्य रंग */
+  --accent-dark:#0056A4; /* hover पर गहरा रंग */
+  --radius:6px; /* border radius */
+  --shadow:0 0 2px var(--secondary); /* हल्का shadow effect */
+}
+
+/*  Body styling - font, color, background सेट करना  */
+body{
+  font-family:'Poppins',sans-serif; /* डिफ़ॉल्ट font */
+  color:var(--primary); /* डिफ़ॉल्ट text color */
+  background:linear-gradient(135deg,#e0e7ff,#d1e3ff); /* हल्का नीला gradient */
+}
+
+/*  Headings का size सेट करना  */
+h1{ font-size:3rem } /* सबसे बड़ा heading */
+h2{ font-size:2rem } /* दूसरा बड़ा heading */
+h3{ font-size:1.5rem } /* तीसरा heading */
+
+/*  Paragraph style - font, size, color, spacing  */
+p{
+  font-family:'Roboto',sans-serif; /* अलग font */
+  font-size:1.25rem; /* text size */
+  color:var(--secondary); /* text का हल्का color */
+  line-height:1.8rem; /* line की ऊँचाई */
+}
+
+/*  Links और Lists का डिफ़ॉल्ट style हटाना  */
+a{
+  text-decoration:none; /* underline हटाना */
+  display:inline-block; /* inline element को block जैसा बनाना */
+}
+ul{
+  list-style:none; /* bullets हटाना */
+}
+
+/*  Container - content को बीच में और max-width सेट करना  */
+.container{
+  max-width:1180px;
+  margin:auto;
+  padding:0 20px;
+
+}
+
+/*  Flex utility - items को flexbox से align करना  */
+.flex{
+  display:flex;
+  align-items:center;
+}
+
+/*  Hover link - hover पर color बदलना  */
+.hover-link{
+  color:var(--primary);
+  transition:.2s; /* smooth transition */
+}
+.hover-link:hover{
+  color:var(--accent); /* hover पर नीला रंग */
+}
+
+/*  Buttons का common style  */
+.primary-button,.secondary-button{
+  border-radius:var(--radius); /* गोल किनारे */
+  font-weight:700; /* bold text */
+  padding:12px 24px; /* अंदर का space */
+  font-size:1rem; /* text size */
+  position:relative; /* ripple effect के लिए */
+  overflow:hidden; /* ripple बाहर ना जाए */
+  transition:.2s; /* hover smoothness */
+  cursor:pointer; /* pointer cursor */
+}
+
+/*  Primary button - नीला background और सफेद text  */
+.primary-button{
+  background:var(--accent);
+  color:#fff!important;
+  box-shadow:var(--shadow);
+}
+.primary-button:hover,.primary-button:focus{
+  background:var(--accent-dark); /* hover पर dark नीला */
+  transform:translateY(-2px); /* ऊपर हल्का उठना */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/*  Secondary button - transparent background और border  */
+.secondary-button{
+  border:1px solid var(--secondary);
+  color:var(--primary)!important;
+  background:transparent;
+}
+.secondary-button:hover,.secondary-button:focus{
+  border-color:var(--accent-dark);
+  color:var(--accent)!important;
+  transform:translateY(-2px);
+}
+
+/*  Ripple effect के लिए styling  */
+.primary-button::after,.secondary-button::after{
+  content:"";
+  position:absolute;
+  background:rgba(255,255,255,.4); /* हल्का सफेद circle */
+  border-radius:50%;
+  transform:scale(0);
+  width:100px;
+  height:100px;
+  pointer-events:none;
+}
+
+/*  Ripple animation - circle फैलना और fade होना  */
+@keyframes ripple{
+  to{
+    transform:scale(4);
+    opacity:0;
+  }
+}
+
+/*  Top banner - नीला gradient और सफेद text  */
+.top-banner{
+  background:linear-gradient(90deg,#4fb3d4,#78ccff);
+  color:#fff;
+  text-align:center;
+  padding:15px 30px;
+}
+
+/*  Navbar styling  */
+.main-nav{
+  margin-top:10px;
+  justify-content:space-between; /* लोगो और links के बीच space */
+}
+.company-logo img{
+  width:100px; /* logo size */
+}
+.nav-links ul{
+  display:flex;
+  gap:2.5rem; /* links के बीच gap */
+  justify-content:flex-end; /* right align */
+}
+
+/*  Header section layout  */
+header{
+  padding:50px 20px;
+}
+.header-section{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap; /* small screen पर wrap */
+}
+.header-left,.header-right{
+  flex:1;
+  max-width:50%;
+}
+.header-right img{
+  width:100%;
+  max-width:600px;
+  object-fit:cover; /* image को fit करना */
+}
+
+/*  Responsive design - mobile view के लिए  */
+@media(max-width:768px){
+  .main-nav{
+    flex-direction:column; /* navbar vertical */
+    gap:10px;
+  }
+  .nav-links ul{
+    flex-direction:column; /* links vertical */
+    gap:1.5rem;
+    align-items:center;
+  }
+  .header-section{
+    text-align:center;
+    flex-direction:column;
+  }
+  .header-left,.header-right{
+    max-width:100%;
+  }
+} 
+/*companies section */
+.companies-header {
+  display: flex;
+  text-align: center;
+  margin-block: 30px;
+  color: var(--primary-text-color);
+  
+}
+
+.logos {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.logo {
+  height: 46px;
+  
+}
+
+/* features section*/
+features-section {
+  padding: 80px var(--paddinh-inline-section) 0;
+  
+}
+
+.features-header {
+  text-align: center;
+}
+
+.features-header h2 {
+  margin: 20px;
+}
+
+.card {
+  height: 80px;
+}
+
+.features-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* सेंटर में लाने के लिए */
+  gap: 20px; /* कार्ड्स के बीच स्पेस */
+}
+
+.features-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* आइकन, हेडिंग, टेक्स्ट सेंटर */
+  text-align: center;
+  gap: 15px;
+  flex: 1 1 300px; /* responsive कार्ड चौड़ाई */
+  max-width: 320px; /* कार्ड का मैक्स साइज़ */
+  padding: 20px;
+/*  background: #fff; /* बैकग्राउंड */
+/*  border-radius: var(--radius);
+  box-shadow: var(--shadow);*/
+}
+
+.features-card img.card {
+  height: 60px; /* आइकन साइज़ */
+}
+
+/* big feature section*/
+.big-feature-section {
+  padding: 30px var(--padding-inline-section) 0;
+}
+
+.big-feature-container {
+  gap: 30px;
+}
+
+.feature-img img {
+  width: 100%;
+}
+
+.feature-desc {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* examples section */
+.examples-header {
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* examples area*/
+
+.examples-area {
+  justify-content: space-between;
+  margin-block: 30px;
+  background-size: cover;
+}
+
+.examples-card {
+  width: 23%;
+  position: relative;
+  min-height: 300px;
+  background: black;
+}
+
+.card-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  color: white 
+}
